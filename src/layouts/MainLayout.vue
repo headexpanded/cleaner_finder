@@ -6,7 +6,12 @@
 
         <q-toolbar-title> Find a Cleaner </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div @click="openDrawer">
+          <q-avatar v-if="isAuthenticated">
+            <img src="https://cdn.quasar.dev/img/avatar.png" />
+          </q-avatar>
+          <q-btn v-else dense flat @click="showLogin()">Login</q-btn>
+        </div>
       </q-toolbar>
     </q-header>
 
@@ -22,11 +27,28 @@
       <router-view />
     </q-page-container>
   </q-layout>
+  <LoginDialog v-model="isLoginDialogOpen" />
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
 import EssentialLink, { type EssentialLinkProps } from 'components/EssentialLink.vue';
+import { useAuthStore } from 'stores/auth-store';
+import LoginDialog from 'components/LoginDialog.vue';
+
+const auth = useAuthStore();
+
+const isAuthenticated = auth.isAuthenticated;
+const userDrawerOpen = ref(false);
+const openDrawer = () => {
+  userDrawerOpen.value = !userDrawerOpen.value;
+  console.log('Value of userDrawerOpen:', userDrawerOpen.value);
+};
+
+const isLoginDialogOpen = ref(false);
+const showLogin = () => {
+  isLoginDialogOpen.value = true;
+};
 
 const linksList: EssentialLinkProps[] = [
   {

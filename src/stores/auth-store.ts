@@ -1,7 +1,7 @@
 import { api } from 'boot/axios';
 import { defineStore } from 'pinia';
 
-import type { User } from 'src/types/user';
+import type { User } from 'src/types/User';
 
 type State = {
   username: string | null;
