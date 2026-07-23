@@ -1,6 +1,5 @@
 <template>
   <div>
-    <p>{{ title }}</p>
     <ul>
       <li v-for="todo in todos" :key="todo.id" @click="increment" class="cursor-pointer">
         {{ todo.id }} - {{ todo.content }}
@@ -17,7 +16,6 @@ import { computed, ref } from 'vue';
 import type { Todo, Meta } from './models';
 
 interface Props {
-  title: string;
   todos?: Todo[];
   meta: Meta;
   active: boolean;

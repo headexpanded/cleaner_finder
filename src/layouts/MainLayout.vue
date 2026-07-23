@@ -30,26 +30,20 @@ import EssentialLink, { type EssentialLinkProps } from 'components/EssentialLink
 
 const linksList: EssentialLinkProps[] = [
   {
-    title: 'Register',
-    caption: 'quasar.dev',
+    title: 'Account',
+    caption: 'your details',
     icon: 'school',
     link: 'https://quasar.dev',
   },
   {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework',
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev',
+    title: 'Register',
+    caption: 'get cleaning gigs',
+    icon: 'school',
+    link: 'https://quasar.dev',
   },
   {
     title: 'Forum',
-    caption: 'forum.quasar.dev',
+    caption: 'rate cleaners',
     icon: 'record_voice_over',
     link: 'https://forum.quasar.dev',
   },
