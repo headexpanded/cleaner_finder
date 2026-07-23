@@ -27,9 +27,9 @@
               :type="showPassword ? 'text' : 'password'"
               required
             >
-              <!-- <template v-slot:append>
+              <template v-slot:append>
                 <TogglePassword v-model="showPassword" />
-              </template> -->
+              </template>
             </q-input>
 
             <q-card-actions align="right" class="row">
@@ -44,7 +44,7 @@
 </template>
 
 <script setup lang="ts">
-// import TogglePassword from 'components/TogglePassword.vue';
+import TogglePassword from 'components/TogglePassword.vue';
 import { useAuthStore } from 'stores/auth-store';
 import { ref } from 'vue';
 
