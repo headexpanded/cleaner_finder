@@ -16,7 +16,13 @@ declare module 'vue' {
 // for each client)
 const api = axios.create({
   baseURL: 'http://localhost:8000',
+  headers: {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+    'X-Requested-With': 'XMLHttpRequest',
+  },
   withCredentials: true,
+  withXSRFToken: true,
 });
 
 export default defineBoot(({ app }) => {
