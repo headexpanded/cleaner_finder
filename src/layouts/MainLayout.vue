@@ -5,7 +5,7 @@
         <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
 
         <q-toolbar-title> Find a Cleaner </q-toolbar-title>
-
+        <q-btn dense flat @click="showRegister()">Register</q-btn>
         <div @click="openDrawer">
           <q-avatar v-if="isAuthenticated">
             <img src="https://cdn.quasar.dev/img/avatar.png" />
@@ -28,6 +28,7 @@
     </q-page-container>
   </q-layout>
   <LoginDialog v-model="isLoginDialogOpen" />
+  <RegisterDialog v-model="isRegisterDialogOpen" />
 </template>
 
 <script setup lang="ts">
@@ -35,6 +36,7 @@ import { ref } from 'vue';
 import EssentialLink, { type EssentialLinkProps } from 'components/EssentialLink.vue';
 import { useAuthStore } from 'stores/auth-store';
 import LoginDialog from 'components/LoginDialog.vue';
+import RegisterDialog from 'components/RegisterDialog.vue';
 
 const auth = useAuthStore();
 
@@ -48,6 +50,11 @@ const openDrawer = () => {
 const isLoginDialogOpen = ref(false);
 const showLogin = () => {
   isLoginDialogOpen.value = true;
+};
+
+const isRegisterDialogOpen = ref(false);
+const showRegister = () => {
+  isRegisterDialogOpen.value = true;
 };
 
 const linksList: EssentialLinkProps[] = [

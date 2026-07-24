@@ -3,7 +3,14 @@
     <q-card>
       <div class="q-pa-md" style="max-width: 400px">
         <q-card-section>
-          <q-form>
+          <q-form
+            autocorrect="off"
+            autocapitalize="off"
+            autocomplete="off"
+            class="q-ma-md"
+            spellcheck="false"
+            @submit.prevent="onSubmit"
+          >
             <q-input
               v-model="postCode"
               label="post code"
