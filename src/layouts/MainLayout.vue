@@ -6,8 +6,8 @@
 
         <q-toolbar-title> Find a Cleaner </q-toolbar-title>
         <q-btn v-if="!isAuthenticated" dense flat @click="showRegister()">Register</q-btn>
-        <div @click="openDrawer">
-          <q-avatar v-if="isAuthenticated">
+        <div>
+          <q-avatar v-if="isAuthenticated" @click="showUserDialog()" class="q-mr-sm">
             <img src="https://cdn.quasar.dev/img/avatar.png" />
           </q-avatar>
           <q-btn v-else dense flat @click="showLogin()">Login</q-btn>
@@ -29,6 +29,7 @@
   </q-layout>
   <LoginDialog v-model="isLoginDialogOpen" />
   <RegisterDialog v-model="isRegisterDialogOpen" />
+  <UserDialog v-model="isUserDialogOpen" />
 </template>
 
 <script setup lang="ts">
@@ -37,15 +38,16 @@ import EssentialLink, { type EssentialLinkProps } from 'components/EssentialLink
 import { useAuthStore } from 'stores/auth-store';
 import LoginDialog from 'components/LoginDialog.vue';
 import RegisterDialog from 'components/RegisterDialog.vue';
+import UserDialog from 'components/UserDialog.vue';
 
 const auth = useAuthStore();
 
 const isAuthenticated = computed(() => auth.isAuthenticated);
-const userDrawerOpen = ref(false);
-const openDrawer = () => {
-  userDrawerOpen.value = !userDrawerOpen.value;
-  console.log('Value of userDrawerOpen:', userDrawerOpen.value);
-};
+// const userDrawerOpen = ref(false);
+// const openDrawer = () => {
+//   userDrawerOpen.value = !userDrawerOpen.value;
+//   console.log('Value of userDrawerOpen:', userDrawerOpen.value);
+// };
 
 const isLoginDialogOpen = ref(false);
 const showLogin = () => {
@@ -55,6 +57,11 @@ const showLogin = () => {
 const isRegisterDialogOpen = ref(false);
 const showRegister = () => {
   isRegisterDialogOpen.value = true;
+};
+
+const isUserDialogOpen = ref(false);
+const showUserDialog = () => {
+  isUserDialogOpen.value = true;
 };
 
 const linksList: EssentialLinkProps[] = [
