@@ -55,7 +55,7 @@ export const useAuthStore = defineStore<'auth', State, Getters, Actions>('auth',
     },
 
     async fetchUser(): Promise<User> {
-      const response = await api.get('/profile', { withCredentials: true });
+      const response = await api.get('/user', { withCredentials: true });
       if (!response.data.username) {
         throw new Error('Missing username in response');
       }
@@ -67,6 +67,7 @@ export const useAuthStore = defineStore<'auth', State, Getters, Actions>('auth',
         roles: roles,
         username: response.data.username,
       });
+      console.log('Fetched user:', response.data);
       return response.data;
     },
 
