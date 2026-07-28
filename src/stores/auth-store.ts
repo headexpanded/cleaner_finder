@@ -45,7 +45,9 @@ export const useAuthStore = defineStore<'auth', State, Getters, Actions>('auth',
   actions: {
     async init() {
       if (!this.csrfFetched) {
+        console.log('Fetching CSRF cookie...');
         await api.get('/sanctum/csrf-cookie');
+        console.log('CSRF cookie fetched');
         this.csrfFetched = true;
       }
     },
@@ -55,7 +57,7 @@ export const useAuthStore = defineStore<'auth', State, Getters, Actions>('auth',
     },
 
     async fetchUser(): Promise<User> {
-      const response = await api.get('/user', { withCredentials: true });
+      const response = await api.get('/user', { withCredentials: true, withXSRFToken: true });
       if (!response.data.username) {
         throw new Error('Missing username in response');
       }
@@ -72,11 +74,16 @@ export const useAuthStore = defineStore<'auth', State, Getters, Actions>('auth',
     },
 
     async login(username: string, password: string) {
+      console.log('Logging in with username:', username);
       await this.init();
 
       try {
         // Use Fortify's login endpoint
-        await api.post('/login', { username, password }, { withCredentials: true });
+        await api.post(
+          '/login',
+          { username, password },
+          { withCredentials: true, withXSRFToken: true },
+        );
 
         // Fortify login returns a redirect response, so we need to fetch the user data
         await this.fetchUser();

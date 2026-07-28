@@ -9,7 +9,7 @@
           <q-form spellcheck="false" @submit.prevent="onSubmit">
             <q-card-actions align="right" class="row">
               <q-btn color="negative" label="Cancel" @click="closeDialog()" />
-              <q-btn type="submit" color="positive" label="Submit" @click="onSubmit" />
+              <q-btn type="submit" color="positive" label="Logout" @click="onSubmit" />
             </q-card-actions>
           </q-form>
         </q-card-section>
@@ -19,11 +19,18 @@
 </template>
 
 <script setup lang="ts">
+import { useAuthStore } from 'stores/auth-store';
+
 const props = defineProps<{
   modelValue: boolean;
 }>();
-const onSubmit = () => {
-  console.log('Submit btn clicked');
+const onSubmit = async () => {
+  try {
+    await useAuthStore().logout();
+    closeDialog();
+  } catch (error) {
+    console.error('Error logging out:', error);
+  }
 };
 const emit = defineEmits<{
   'update:modelValue': [value: boolean];

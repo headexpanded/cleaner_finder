@@ -34,7 +34,7 @@
 
             <q-card-actions align="right" class="row">
               <q-btn color="negative" label="Cancel" @click="closeDialog" />
-              <q-btn type="submit" color="positive" label="Login" @click="login" />
+              <q-btn type="submit" color="positive" label="Login" />
             </q-card-actions>
           </q-card-section>
         </q-form>
@@ -58,6 +58,8 @@ const emit = defineEmits<{
 
 const closeDialog = () => {
   emit('update:modelValue', false);
+  username.value = '';
+  password.value = '';
 };
 
 const username = ref('');
@@ -65,6 +67,7 @@ const password = ref('');
 const showPassword = ref(false);
 const login = async () => {
   try {
+    console.log('Attempting login with username:', username.value);
     await useAuthStore().login(username.value, password.value);
     closeDialog();
   } catch (error) {
