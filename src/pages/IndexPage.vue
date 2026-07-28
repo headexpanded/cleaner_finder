@@ -62,6 +62,12 @@ const showUserDialog = () => {
   isUserDialogOpen.value = true;
 };
 
+// const userDrawerOpen = ref(false);
+// const openDrawer = () => {
+//   userDrawerOpen.value = !userDrawerOpen.value;
+//   console.log('Value of userDrawerOpen:', userDrawerOpen.value);
+// };
+
 const linksList: EssentialLinkProps[] = [
   {
     title: 'Account',

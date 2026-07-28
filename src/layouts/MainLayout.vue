@@ -6,10 +6,4 @@
   </q-layout>
 </template>
 
-<script setup lang="ts">
-// const userDrawerOpen = ref(false);
-// const openDrawer = () => {
-//   userDrawerOpen.value = !userDrawerOpen.value;
-//   console.log('Value of userDrawerOpen:', userDrawerOpen.value);
-// };
-</script>
+<script setup lang="ts"></script>
