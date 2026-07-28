@@ -9,7 +9,7 @@
           <q-form spellcheck="false" @submit.prevent="onSubmit">
             <q-card-actions align="right" class="row">
               <q-btn color="negative" label="Cancel" @click="closeDialog()" />
-              <q-btn type="submit" color="positive" label="Logout" @click="onSubmit" />
+              <q-btn type="submit" color="positive" label="Logout" />
             </q-card-actions>
           </q-form>
         </q-card-section>

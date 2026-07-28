@@ -5,12 +5,14 @@
         <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
 
         <q-toolbar-title> Find a Cleaner </q-toolbar-title>
-        <q-btn v-if="!isAuthenticated" dense flat @click="showRegister()">Register</q-btn>
-        <div>
-          <q-avatar v-if="isAuthenticated" @click="showUserDialog()" class="q-mr-sm">
+        <div v-if="isAuthenticated">
+          <q-avatar @click="showUserDialog()" class="q-mr-sm">
             <img src="https://cdn.quasar.dev/img/avatar.png" />
           </q-avatar>
-          <q-btn v-else dense flat @click="showLogin()">Login</q-btn>
+        </div>
+        <div v-else>
+          <q-btn dense flat @click="showRegister()">Register</q-btn>
+          <q-btn dense flat @click="showLogin()">Login</q-btn>
         </div>
       </q-toolbar>
     </q-header>
