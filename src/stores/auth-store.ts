@@ -12,6 +12,7 @@ type State = {
 type Getters = {
   isAdmin: (state: State) => boolean;
   isAuthenticated: (state: State) => boolean;
+  isBusinessUser: (state: State) => boolean;
 };
 
 type Actions = {
@@ -23,6 +24,7 @@ type Actions = {
     password: string;
     password_confirmation: string;
     username: string;
+    isBusinessUser: boolean;
   }) => Promise<void>;
   fetchUser: () => Promise<User>;
   checkAuth: () => Promise<boolean>;
@@ -41,13 +43,12 @@ export const useAuthStore = defineStore<'auth', State, Getters, Actions>('auth',
   getters: {
     isAdmin: (state) => state.roles.includes('admin'),
     isAuthenticated: (state) => !!state.username,
+    isBusinessUser: (state) => state.roles.includes('business'),
   },
   actions: {
     async init() {
       if (!this.csrfFetched) {
-        console.log('Fetching CSRF cookie...');
         await api.get('/sanctum/csrf-cookie');
-        console.log('CSRF cookie fetched');
         this.csrfFetched = true;
       }
     },
@@ -63,18 +64,19 @@ export const useAuthStore = defineStore<'auth', State, Getters, Actions>('auth',
       }
 
       // Extract roles from is_admin field
-      const roles = response.data.is_admin ? ['admin'] : [];
+      const roles = [
+        ...(response.data.is_admin ? ['admin'] : []),
+        ...(response.data.is_business_user ? ['business'] : []),
+      ];
 
       this.$patch({
         roles: roles,
         username: response.data.username,
       });
-      console.log('Fetched user:', response.data);
       return response.data;
     },
 
     async login(username: string, password: string) {
-      console.log('Logging in with username:', username);
       await this.init();
 
       try {
@@ -103,6 +105,7 @@ export const useAuthStore = defineStore<'auth', State, Getters, Actions>('auth',
       password: string;
       password_confirmation: string;
       username: string;
+      isBusinessUser: boolean;
     }) {
       await this.init();
       await api.post('/register', payload);

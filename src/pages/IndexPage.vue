@@ -29,7 +29,7 @@
       v-model="isPostCodeDialogOpen"
     ></post-code-component>
     <LoginDialog v-model="isLoginDialogOpen" />
-    <RegisterDialog v-model="isRegisterDialogOpen" />
+    <RegisterCustomerDialog v-model="isRegisterCustomerDialogOpen" />
     <UserDialog v-model="isUserDialogOpen" />
   </q-page>
 </template>
@@ -39,7 +39,7 @@ import PostCodeComponent from 'components/PostCodeComponent.vue';
 import { ref, computed } from 'vue';
 import EssentialLink, { type EssentialLinkProps } from 'components/EssentialLink.vue';
 import LoginDialog from 'components/LoginDialog.vue';
-import RegisterDialog from 'components/RegisterDialog.vue';
+import RegisterCustomerDialog from 'components/RegisterCustomerDialog.vue';
 import UserDialog from 'components/UserDialog.vue';
 import { useAuthStore } from 'stores/auth-store';
 
@@ -52,9 +52,9 @@ const showLogin = () => {
   isLoginDialogOpen.value = true;
 };
 
-const isRegisterDialogOpen = ref(false);
+const isRegisterCustomerDialogOpen = ref(false);
 const showRegister = () => {
-  isRegisterDialogOpen.value = true;
+  isRegisterCustomerDialogOpen.value = true;
 };
 
 const isUserDialogOpen = ref(false);
